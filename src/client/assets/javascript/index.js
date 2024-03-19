@@ -348,11 +348,20 @@ async function getTracks() {
 	}
 }
 
-function getRacers() {
+async function getRacers() {
+	console.log(`calling server :: ${SERVER}/api/cars`)
 	// GET request to `${SERVER}/api/cars`
-
-	// Fetch racers
-	// TIP: Do a file search for "TODO" to make sure you find all the things you need to do! There are even some vscode plugins that will highlight todos for you
+	try {
+		const data = await fetch(`${SERVER}/api/cars`, {
+			method: "GET",
+			dataType: "jsonp",
+			...defaultFetchOpts()
+		})
+		console.log("getRacers:", data)
+		return data.json()
+	} catch (e) {
+		console.log("Error occurred in getRacers: ", e);
+	}
 }
 
 function createRace(player_id, track_id) {
