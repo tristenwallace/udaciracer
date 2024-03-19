@@ -1,5 +1,3 @@
-// PROVIDED CODE BELOW (LINES 1 - 80) DO NOT REMOVE
-
 // The store will hold all information needed globally
 let store = {
 	track_id: undefined,
@@ -79,10 +77,6 @@ async function delay(ms) {
 	}
 }
 
-// ^ PROVIDED CODE ^ DO NOT REMOVE
-
-// BELOW THIS LINE IS CODE WHERE STUDENT EDITS ARE NEEDED ----------------------------
-// TIP: Do a full file search for TODO to find everything that needs to be done for the game to work
 
 // This async function controls the flow of the race, add the logic and error handling
 async function handleCreateRace() {
@@ -91,22 +85,21 @@ async function handleCreateRace() {
 	// render starting UI
 	renderAt('#race', renderRaceStartView(store.track_name))
 
-	// TODO - Get player_id and track_id from the store
-	
-	// const race = TODO - call the asynchronous method createRace, passing the correct parameters
+	// Get player_id and track_id from the store
+	const playerId = store.player_id;
+	const trackId = store.track_id;
 
-	// TODO - update the store with the race id in the response
-	// TIP - console logging API responses can be really helpful to know what data shape you received
+	// call asynchronous method createRace
+	const race = await createRace(playerId, trackId)
+
+	// update the store with the race id in the response
 	console.log("RACE: ", race)
-	// store.race_id = 
+	store.race_id = parseInt(race.ID) - 1;
 	
 	// The race has been created, now start the countdown
-	// TODO - call the async function runCountdown
-
-	// TODO - call the async function startRace
-	// TIP - remember to always check if a function takes parameters before calling it!
-
-	// TODO - call the async function runRace
+	await runCountdown();
+	await startRace(store.race_id); 
+	await runRace(store.race_id);
 }
 
 function runRace(raceID) {
