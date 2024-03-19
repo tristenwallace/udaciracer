@@ -1,5 +1,3 @@
-// PROVIDED CODE BELOW (LINES 1 - 80) DO NOT REMOVE
-
 // The store will hold all information needed globally
 let store = {
   track_id: undefined,
@@ -81,10 +79,6 @@ async function delay(ms) {
   }
 }
 
-// ^ PROVIDED CODE ^ DO NOT REMOVE
-
-// BELOW THIS LINE IS CODE WHERE STUDENT EDITS ARE NEEDED ----------------------------
-// TIP: Do a full file search for TODO to find everything that needs to be done for the game to work
 
 // This async function controls the flow of the race, add the logic and error handling
 async function handleCreateRace() {
@@ -93,27 +87,26 @@ async function handleCreateRace() {
   // render starting UI
   renderAt('#race', renderRaceStartView(store.track_name));
 
-  // TODO - Get player_id and track_id from the store
+	// Get player_id and track_id from the store
+	const playerId = store.player_id;
+	const trackId = store.track_id;
 
-  // const race = TODO - call the asynchronous method createRace, passing the correct parameters
+	// call asynchronous method createRace
+	const race = await createRace(playerId, trackId)
 
-  // TODO - update the store with the race id in the response
-  // TIP - console logging API responses can be really helpful to know what data shape you received
-  console.log('RACE: ', race);
-  // store.race_id =
-
-  // The race has been created, now start the countdown
-  // TODO - call the async function runCountdown
-
-  // TODO - call the async function startRace
-  // TIP - remember to always check if a function takes parameters before calling it!
-
-  // TODO - call the async function runRace
+	// update the store with the race id in the response
+	console.log("RACE: ", race)
+	store.race_id = parseInt(race.ID) - 1;
+	
+	// The race has been created, now start the countdown
+	await runCountdown();
+	await startRace(store.race_id); 
+	await runRace(store.race_id);
 }
 
 function runRace(raceID) {
   return new Promise(resolve => {
-    // TODO - use Javascript's built in setInterval method to get race info (getRace function) every 500ms
+    // Use Javascript's built in setInterval method to get race info (getRace function) every 500ms
     const raceInterval = setInterval(async () => {
       const data = await getRace(raceID).catch(e =>
         console.log('getRace error ', e)
@@ -144,7 +137,7 @@ async function runCountdown() {
           clearInterval(countdownInterval);
           resolve();
         }
-      }, 1500);
+      }, 1000);
     });
   } catch (error) {
     console.log(error);
@@ -183,7 +176,6 @@ function handleAccelerate() {
 }
 
 // HTML VIEWS ------------------------------------------------
-// Provided code - do not remove
 
 function renderRacerCars(racers) {
   if (!racers.length) {
@@ -314,8 +306,6 @@ function renderAt(element, html) {
   node.innerHTML = html;
 }
 
-// ^ Provided code ^ do not remove
-
 // API CALLS ------------------------------------------------
 
 const SERVER = 'http://localhost:3001';
@@ -329,8 +319,6 @@ function defaultFetchOpts() {
     },
   };
 }
-
-// TODO - Make a fetch call (with error handling!) to each of the following API endpoints
 
 async function getTracks() {
   console.log(`calling server :: ${SERVER}/api/tracks`);
@@ -388,7 +376,7 @@ async function getRace(id) {
       dataType: 'jsonp',
       ...defaultFetchOpts(),
     });
-    console.log('getRace:', data);
+    // console.log('getRace:', data);
     return data.json();
   } catch (e) {
     console.log('Error occurred in getRace: ', e);
