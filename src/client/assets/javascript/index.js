@@ -106,7 +106,7 @@ async function handleCreateRace() {
 
 function runRace(raceID) {
   return new Promise(resolve => {
-    // TODO - use Javascript's built in setInterval method to get race info (getRace function) every 500ms
+    // Use Javascript's built in setInterval method to get race info (getRace function) every 500ms
     const raceInterval = setInterval(async () => {
       const data = await getRace(raceID).catch(e =>
         console.log('getRace error ', e)
@@ -176,7 +176,6 @@ function handleAccelerate() {
 }
 
 // HTML VIEWS ------------------------------------------------
-// Provided code - do not remove
 
 function renderRacerCars(racers) {
   if (!racers.length) {
@@ -307,8 +306,6 @@ function renderAt(element, html) {
   node.innerHTML = html;
 }
 
-// ^ Provided code ^ do not remove
-
 // API CALLS ------------------------------------------------
 
 const SERVER = 'http://localhost:3001';
@@ -322,8 +319,6 @@ function defaultFetchOpts() {
     },
   };
 }
-
-// TODO - Make a fetch call (with error handling!) to each of the following API endpoints
 
 async function getTracks() {
   console.log(`calling server :: ${SERVER}/api/tracks`);
