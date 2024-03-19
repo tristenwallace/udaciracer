@@ -3,7 +3,8 @@
 /* -------------------  MOBILE  --------------------- */
 
 header {
-  background-image: url('https://via.placeholder.com/1150');
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('../images/pod-racers.jpeg');
 }
 
 /* -------------------  TABLET  --------------------- */

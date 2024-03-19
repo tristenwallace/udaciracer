@@ -1,5 +1,63 @@
 /* RESULTS PAGE SPECIFIC STYLES */
 
+/* Base card styling */
+.card {
+  background-color: #fff; /* White background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin: 20px auto; /* Center the card with some margin */
+  max-width: 600px; /* Maximum width */
+  padding: 20px; /* Padding inside the card */
+  box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+.card header,
+.card main {
+  margin-bottom: 20px; /* Space between sections */
+}
+
+.card h1,
+.card h3 {
+  color: #333; /* Dark text for better readability */
+  margin: 0 0 10px 0; /* Space below headings */
+}
+
+.card p {
+  color: #666; /* Lighter text color */
+  line-height: 1.6; /* Increase line height for readability */
+}
+
+.card a {
+  display: inline-block; /* Allow margin and padding */
+  background-color: #007bff; /* Bootstrap primary blue */
+  color: #fff; /* White text */
+  text-decoration: none; /* Remove underline */
+  padding: 10px 15px; /* Padding for a larger click area */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.card a:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Table styling for race progress */
+.card table {
+  width: 100%; /* Full width */
+  border-collapse: collapse; /* Remove space between borders */
+}
+
+.card th,
+.card td {
+  text-align: left; /* Align text to the left */
+  padding: 8px; /* Padding in table cells */
+  border-bottom: 1px solid #ddd; /* Light border for each row */
+}
+
+.card tr:last-child td {
+  border-bottom: none; /* Remove the bottom border for the last row */
+}
+
 /* -------------------  MOBILE  --------------------- */
 
 /* -------------------  TABLET  --------------------- */
