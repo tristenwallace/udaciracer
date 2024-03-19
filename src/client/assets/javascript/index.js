@@ -179,11 +179,10 @@ function handleSelectTrack(target) {
 
 function handleAccelerate() {
   console.log('accelerate button clicked');
-  // TODO - Invoke the API call to accelerate
+  accelerate(store.race_id);
 }
 
 // HTML VIEWS ------------------------------------------------
-// Provided code - do not remove
 
 function renderRacerCars(racers) {
   if (!racers.length) {
@@ -314,8 +313,6 @@ function renderAt(element, html) {
   node.innerHTML = html;
 }
 
-// ^ Provided code ^ do not remove
-
 // API CALLS ------------------------------------------------
 
 const SERVER = 'http://localhost:3001';
@@ -329,8 +326,6 @@ function defaultFetchOpts() {
     },
   };
 }
-
-// TODO - Make a fetch call (with error handling!) to each of the following API endpoints
 
 async function getTracks() {
   console.log(`calling server :: ${SERVER}/api/tracks`);
@@ -388,7 +383,7 @@ async function getRace(id) {
       dataType: 'jsonp',
       ...defaultFetchOpts(),
     });
-    console.log('getRace:', data);
+    // console.log('getRace:', data);
     return data.json();
   } catch (e) {
     console.log('Error occurred in getRace: ', e);
@@ -404,8 +399,12 @@ function startRace(id) {
     .catch(err => console.log('Problem with getRace request::', err));
 }
 
-function accelerate(id) {
+async function accelerate(id) {
   // POST request to `${SERVER}/api/races/${id}/accelerate`
-  // options parameter provided as defaultFetchOpts
-  // no body or datatype needed for this request
+  const id = parseInt(id) - 1;
+  await fetch(`${SERVER}/api/races/${id}/accelerate`, {
+    method: 'POST',
+    ...defaultFetchOpts(),
+  }).then(res => res)
+  .catch((e) => console.log('Error occurred in getRace: ', e))
 }
