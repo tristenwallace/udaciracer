@@ -137,7 +137,7 @@ async function runCountdown() {
           clearInterval(countdownInterval);
           resolve();
         }
-      }, 1500);
+      }, 1000);
     });
   } catch (error) {
     console.log(error);
@@ -376,7 +376,7 @@ async function getRace(id) {
       dataType: 'jsonp',
       ...defaultFetchOpts(),
     });
-    console.log('getRace:', data);
+    // console.log('getRace:', data);
     return data.json();
   } catch (e) {
     console.log('Error occurred in getRace: ', e);
