@@ -325,19 +325,36 @@ function defaultFetchOpts() {
 
 // TODO - Make a fetch call (with error handling!) to each of the following API endpoints 
 
-function getTracks() {
+async function getTracks() {
 	console.log(`calling server :: ${SERVER}/api/tracks`)
 	// GET request to `${SERVER}/api/tracks`
-
-	// TODO: Fetch tracks
-	// TIP: Don't forget a catch statement!
+	try {
+		const data = await fetch(`${SERVER}/api/tracks`, {
+			method: "GET",
+			dataType: "jsonp",
+			...defaultFetchOpts()
+		}); 
+		console.log("getTracks:", data)
+		return data.json();
+	} catch (e) {
+		console.log("Error occurred in getTracks: ", e);
+	}
 }
 
-function getRacers() {
+async function getRacers() {
+	console.log(`calling server :: ${SERVER}/api/cars`)
 	// GET request to `${SERVER}/api/cars`
-
-	// TODO: Fetch racers
-	// TIP: Do a file search for "TODO" to make sure you find all the things you need to do! There are even some vscode plugins that will highlight todos for you
+	try {
+		const data = await fetch(`${SERVER}/api/cars`, {
+			method: "GET",
+			dataType: "jsonp",
+			...defaultFetchOpts()
+		})
+		console.log("getRacers:", data)
+		return data.json()
+	} catch (e) {
+		console.log("Error occurred in getRacers: ", e);
+	}
 }
 
 function createRace(player_id, track_id) {
@@ -355,8 +372,20 @@ function createRace(player_id, track_id) {
 	.catch(err => console.log("Problem with createRace request::", err))
 }
 
-function getRace(id) {
+async function getRace(id) {
+	const raceId = parseInt(id);
 	// GET request to `${SERVER}/api/races/${id}`
+	try {
+		const data = await fetch(`${SERVER}/api/races/${raceId}`, {
+			method: "GET",
+			dataType: "jsonp",
+			...defaultFetchOpts()
+		})
+		console.log("getRace:", data)
+		return data.json()
+	} catch (e) {
+		console.log("Error occurred in getRace: ", e);
+	}
 }
 
 function startRace(id) {
