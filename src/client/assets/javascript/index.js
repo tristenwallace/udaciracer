@@ -332,18 +332,26 @@ function defaultFetchOpts() {
 
 // TODO - Make a fetch call (with error handling!) to each of the following API endpoints 
 
-function getTracks() {
+async function getTracks() {
 	console.log(`calling server :: ${SERVER}/api/tracks`)
 	// GET request to `${SERVER}/api/tracks`
-
-	// TODO: Fetch tracks
-	// TIP: Don't forget a catch statement!
+	try {
+		const data = await fetch(`${SERVER}/api/tracks`, {
+			method: "GET",
+			dataType: "jsonp",
+			...defaultFetchOpts()
+		}); 
+		console.log("getTracks:", data)
+		return data.json();
+	} catch (e) {
+		console.log("Error occurred in getTracks: ", e);
+	}
 }
 
 function getRacers() {
 	// GET request to `${SERVER}/api/cars`
 
-	// TODO: Fetch racers
+	// Fetch racers
 	// TIP: Do a file search for "TODO" to make sure you find all the things you need to do! There are even some vscode plugins that will highlight todos for you
 }
 
